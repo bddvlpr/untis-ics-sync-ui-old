@@ -16,6 +16,6 @@ COPY --from=build-env /app/build/ .
 COPY --from=build-env /app/node_modules/ ./node_modules/
 COPY --from=build-env /app/package.json .
 
-HEALTHCHECK --interval=10s --timeout=10s --start-period=5s --retries=3 CMD curl --fail http://localhost:3000/health || exit 1
+HEALTHCHECK --interval=10s --timeout=10s --start-period=5s --retries=3 CMD curl --fail http://localhost:3000/ || exit 1
 EXPOSE 3000
 CMD ["node", "index.js"]
