@@ -21,7 +21,7 @@
 	let url = '';
 
 	$: {
-		url = data.selectedClass ? `${env.PUBLIC_BASE_URL}/class/${data.selectedClass}` : '';
+		url = data.selectedClass ? `${env.PUBLIC_BASE_URL}/timetables/${data.selectedClass}` : '';
 	}
 
 	onMount(() => fetchClasses());
