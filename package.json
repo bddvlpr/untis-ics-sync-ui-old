@@ -1,6 +1,6 @@
 {
 	"name": "untis-ics-sync-ui",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"description": "Small and lightweight frontend for untis-ics-sync.",
 	"repository": "https://github.com/bddvlpr/untis-ics-sync-ui.git",
 	"author": "Luna Simons <luna@bddvlpr.com>",
