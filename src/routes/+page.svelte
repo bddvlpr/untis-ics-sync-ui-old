@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { PUBLIC_BASE_URL } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 	import Jumbotron from '../components/content/Jumbotron.svelte';
 
 	const fetchClasses = () => {
-		fetch(`${PUBLIC_BASE_URL}/classes`)
+		fetch(`${env.PUBLIC_BASE_URL}/classes`)
 			.then((response) => response.json())
 			.then((response) => {
 				data.classes = response;
@@ -21,7 +21,7 @@
 	let url = '';
 
 	$: {
-		url = data.selectedClass ? `${PUBLIC_BASE_URL}/class/${data.selectedClass}` : '';
+		url = data.selectedClass ? `${env.PUBLIC_BASE_URL}/class/${data.selectedClass}` : '';
 	}
 
 	onMount(() => fetchClasses());
