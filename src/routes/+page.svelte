@@ -18,10 +18,13 @@
 		classes: [],
 		selectedClass: ''
 	};
-	let url = '';
+
+	let classUrl = '',
+		holidaysUrl = '';
 
 	$: {
-		url = data.selectedClass ? `${env.PUBLIC_BASE_URL}/timetables/${data.selectedClass}` : '';
+		classUrl = data.selectedClass ? `${env.PUBLIC_BASE_URL}/timetables/${data.selectedClass}` : '';
+		holidaysUrl = `${env.PUBLIC_BASE_URL}/holidays`;
 	}
 
 	onMount(() => fetchClasses());
@@ -84,7 +87,7 @@
 						type="text"
 						id="url"
 						class="rounded-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						value={url}
+						value={classUrl}
 						disabled
 						readonly
 					/>
@@ -93,7 +96,29 @@
 					<button
 						type="button"
 						class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-						on:click={() => navigator.clipboard.writeText(url)}>Copy</button
+						on:click={() => navigator.clipboard.writeText(classUrl)}>Copy</button
+					>
+				</div>
+				<div class="m-2">
+					<label
+						for="holidays-url"
+						class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+						>Output Holidays URL</label
+					>
+					<input
+						type="text"
+						id="holidays-url"
+						class="rounded-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						value={holidaysUrl}
+						disabled
+						readonly
+					/>
+				</div>
+				<div class="m-2">
+					<button
+						type="button"
+						class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+						on:click={() => navigator.clipboard.writeText(holidaysUrl)}>Copy</button
 					>
 				</div>
 			</div>
