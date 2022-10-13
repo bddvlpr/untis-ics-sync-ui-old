@@ -4,7 +4,6 @@
 	import Jumbotron from '../components/content/Jumbotron.svelte';
 	import FormTextInput from '../components/form/FormTextInput.svelte';
 	import FormSelectInput from '../components/form/FormSelectInput.svelte';
-	import Button from '../components/action/Button.svelte';
 
 	const fetchClasses = () => {
 		fetch(`${env.PUBLIC_BASE_URL}/classes`)
@@ -73,8 +72,15 @@
 					{/each}
 				</FormSelectInput>
 
-				<FormTextInput label="Output URL" id="url" value={classUrl} disabled readonly />
-				<Button on:click={() => navigator.clipboard.writeText(classUrl)}>Copy</Button>
+				<FormTextInput
+					label="Output URL"
+					id="url"
+					value={classUrl}
+					disabled
+					readonly
+					button
+					on:click={() => navigator.clipboard.writeText(classUrl)}>Copy</FormTextInput
+				>
 
 				<FormTextInput
 					label="Output Holidays URL"
@@ -82,8 +88,9 @@
 					value={holidaysUrl}
 					disabled
 					readonly
-				/>
-				<Button on:click={() => navigator.clipboard.writeText(holidaysUrl)}>Copy</Button>
+					button
+					on:click={() => navigator.clipboard.writeText(holidaysUrl)}>Copy</FormTextInput
+				>
 			</div>
 		{/if}
 	</Jumbotron>
