@@ -2,6 +2,8 @@
 	import { onMount } from 'svelte';
 	import { env } from '$env/dynamic/public';
 	import Jumbotron from '../components/content/Jumbotron.svelte';
+	import FormTextInput from '../components/form/FormTextInput.svelte';
+	import FormSelectInput from '../components/form/FormSelectInput.svelte';
 
 	const fetchClasses = () => {
 		fetch(`${env.PUBLIC_BASE_URL}/classes`)
@@ -63,64 +65,34 @@
 				/></svg
 			>
 		{:else}
-			<div>
-				<div class="m-2">
-					<label
-						for="classes"
-						class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-						>Select a class</label
-					>
-					<select
-						id="classes"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						bind:value={data.selectedClass}
-						>{#each data.classes as klass}
-							<option value={klass.id}>{klass.name}</option>
-						{/each}</select
-					>
-				</div>
-				<div class="m-2">
-					<label for="url" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-						>Output URL</label
-					>
-					<input
-						type="text"
-						id="url"
-						class="rounded-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						value={classUrl}
-						disabled
-						readonly
-					/>
-				</div>
-				<div class="m-2">
-					<button
-						type="button"
-						class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-						on:click={() => navigator.clipboard.writeText(classUrl)}>Copy</button
-					>
-				</div>
-				<div class="m-2">
-					<label
-						for="holidays-url"
-						class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-						>Output Holidays URL</label
-					>
-					<input
-						type="text"
-						id="holidays-url"
-						class="rounded-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						value={holidaysUrl}
-						disabled
-						readonly
-					/>
-				</div>
-				<div class="m-2">
-					<button
-						type="button"
-						class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-						on:click={() => navigator.clipboard.writeText(holidaysUrl)}>Copy</button
-					>
-				</div>
+			<div class="space-y-2 m-2">
+				<FormSelectInput label="Select a class" id="classes" bind:value={data.selectedClass}>
+					{#each data.classes as klass}
+						<option value={klass.id}>{klass.name}</option>
+					{/each}
+				</FormSelectInput>
+
+				<FormTextInput label="Output URL" id="url" value={classUrl} disabled readonly />
+
+				<button
+					type="button"
+					class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+					on:click={() => navigator.clipboard.writeText(classUrl)}>Copy</button
+				>
+
+				<FormTextInput
+					label="Output Holidays URL"
+					id="holidays-url"
+					value={holidaysUrl}
+					disabled
+					readonly
+				/>
+
+				<button
+					type="button"
+					class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+					on:click={() => navigator.clipboard.writeText(holidaysUrl)}>Copy</button
+				>
 			</div>
 		{/if}
 	</Jumbotron>
